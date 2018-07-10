@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Parsetagram</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="log_in">Log in</string>
+    <string name="home_activity">HOME ACTIVITY</string>
+    <string name="enter_a_caption">Enter a caption</string>
+    <string name="create">Create</string>
+    <string name="refresh">Refresh</string>
+    <string name="homeAct">HomeActivity</string>
+    <string name="create_account">Create Account</string>
+    <string name="email">Email</string>
+    <string name="home">Home</string>
+    <string name="don_t_have_an_account_yet">Don\'t have an account yet?</string>
+</resources>
