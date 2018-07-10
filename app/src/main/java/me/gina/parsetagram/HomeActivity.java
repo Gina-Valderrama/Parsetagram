@@ -1,5 +1,6 @@
 package me.gina.parsetagram;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -24,6 +25,7 @@ public class HomeActivity extends AppCompatActivity {
     private EditText captionInput;
     private Button createButton;
     private Button refreshButton;
+    private Button logoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,17 @@ public class HomeActivity extends AppCompatActivity {
         captionInput = findViewById(R.id.etCaption);
         createButton =  findViewById(R.id.btnCreate);
         refreshButton =  findViewById(R.id.btnRefresh);
+        logoutButton =  findViewById(R.id.btnLogout);
+
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ParseUser.logOut();
+                final Intent i = new Intent(HomeActivity.this, MainActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
 
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override

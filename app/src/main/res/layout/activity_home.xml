@@ -34,4 +34,15 @@
         android:layout_marginBottom="50dp"
         android:text="@string/refresh" />
 
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/log_out"
+        android:layout_alignParentRight="true" />
+
 </RelativeLayout>
