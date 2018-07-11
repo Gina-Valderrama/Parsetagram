@@ -22,7 +22,18 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
+
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            // do stuff with the user
+            final Intent i = new Intent (MainActivity.this, HomeActivity.class);
+            startActivity(i);
+            finish();
+        }
+
         setContentView(R.layout.activity_main);
 
         usernameInput = (EditText) findViewById(R.id.etUsername);
