@@ -28,6 +28,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import me.gina.parsetagram.model.BitmapScaler;
 import me.gina.parsetagram.model.DeviceDimensionsHelper;
@@ -69,13 +71,14 @@ public class CreateActivity extends AppCompatActivity {
                 final ParseUser user = ParseUser.getCurrentUser();
                 final File file = new File(imagePath);
                 final ParseFile parseFile = new ParseFile(file);
+                final String time = getCurrenttime();
 
                 parseFile.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
                         if (e == null) {
                             Log.d("CreateActivity", "uploaded file success");
-                            createPost(caption, parseFile, user);
+                            createPost(caption, parseFile, user, time);
                         } else {
                             e.printStackTrace();
                         }
@@ -90,16 +93,17 @@ public class CreateActivity extends AppCompatActivity {
                 refresh();
             }
         });
-
-
     }
 
-//TODO add parcel stuff
-    private void createPost(String caption, ParseFile imageFile, ParseUser user){
+    public static String getCurrenttime(){
+        return new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZZZ yyyy").format(new Date());
+    }
+    private void createPost(String caption, ParseFile imageFile, ParseUser user, String time){
         final Post newPost = new Post();
         newPost.setCaption(caption);
         newPost.setImage(imageFile);
         newPost.setUser(user);
+        newPost.setTime(time);
 
         newPost.saveInBackground(new SaveCallback() {
             @Override
@@ -114,31 +118,11 @@ public class CreateActivity extends AppCompatActivity {
         });
     }
 
+
     private void refresh(){
         Intent data = new Intent(CreateActivity.this, TimelineActivity.class);
         startActivity(data);
         finish();
-
-
-
-//        final Post.Query postsQuery = new Post.Query();
-//        postsQuery.getTop().withUser();
-//
-//        postsQuery.findInBackground(new FindCallback<Post>() {
-//            @Override
-//            public void done(List<Post> objects, ParseException e) {
-//                if (e == null){
-//                    for (int i = 0; i < objects.size(); i++){
-//                        Log.d("CreateActivity", "Post[" + i + "] = "
-//                                + objects.get(i).getCaption() + "\nusername = "
-//                                + objects.get(i).getUser().getUsername());
-//                        //postsQuery
-//                    }
-//                } else {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
 
     }
 

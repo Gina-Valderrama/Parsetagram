@@ -6,7 +6,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.parse.FindCallback;
@@ -68,17 +67,9 @@ public class TimelineActivity extends AppCompatActivity {
             @Override
             public void done(List<Post> objects, ParseException e) {
                 if (e == null){
-                    for (int i = 0; i < objects.size(); i++){
-                        Log.d("CreateActivity", "Post[" + i + "] = "
-                                + objects.get(i).getCaption() + "\nusername = "
-                                + objects.get(i).getUser().getUsername());
-                        Post post = new Post();
-                        post.setUser(objects.get(i).getUser());
-                        post.setImage(objects.get(i).getImage());
-                        post.setCaption(objects.get(i).getCaption());
-                        posts.add(post);
-                        pAdapter.notifyItemInserted(posts.size()-1);
-                    }
+                   posts.clear();
+                   posts.addAll(objects);
+                   pAdapter.notifyDataSetChanged();
                 } else {
                     e.printStackTrace();
                 }
