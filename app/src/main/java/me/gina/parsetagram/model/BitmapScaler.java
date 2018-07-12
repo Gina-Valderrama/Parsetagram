@@ -2,8 +2,10 @@ package me.gina.parsetagram.model;
 
 import android.graphics.Bitmap;
 
+
 public class BitmapScaler
 {
+
     // Scale and maintain aspect ratio given a desired width
     // me.gina.parsetagram.model.BitmapScaler.scaleToFitWidth(bitmap, 100);
     public static Bitmap scaleToFitWidth(Bitmap b, int width)

@@ -6,15 +6,28 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+
 @ParseClassName("Post")
 public class Post extends ParseObject {
     private static final String KEY_CAPTION = "caption";
     private static final String KEY_IMAGE = "image";
     private static final String KEY_USER = "user";
+    private static final String KEY_ID = "objectId";
 
+    public Post(){
+
+    }
     public String getCaption(){
         return getString(KEY_CAPTION);
     }
+
+//    public String getID(){
+//        return getString(KEY_ID);
+//    }
+//
+//    public void setID(String id){
+//        put(KEY_ID, id);
+//    }
 
     public void setCaption(String caption){
         put(KEY_CAPTION, caption);
@@ -34,6 +47,8 @@ public class Post extends ParseObject {
         put(KEY_USER, user);
     }
 
+
+
     public static class Query extends ParseQuery<Post>{
         public Query () {
             super(Post.class);
@@ -49,4 +64,5 @@ public class Post extends ParseObject {
             return this;
         }
     }
+
 }

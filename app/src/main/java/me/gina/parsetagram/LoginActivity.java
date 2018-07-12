@@ -12,7 +12,7 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameInput;
     private EditText passwordInput;
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {
             // do stuff with the user
-            final Intent i = new Intent (MainActivity.this, HomeActivity.class);
+            final Intent i = new Intent (LoginActivity.this, TimelineActivity.class);
             startActivity(i);
             finish();
         }
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Intent i = new Intent (MainActivity.this, SignupActivity.class);
+                final Intent i = new Intent (LoginActivity.this, SignupActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             public void done(ParseUser user, ParseException e) {
                 if(e == null){
                     Log.d("LoginActivity", "Login successful");
-                    final Intent i = new Intent(MainActivity.this, HomeActivity.class);
+                    final Intent i = new Intent(LoginActivity.this, TimelineActivity.class);
                     startActivity(i);
                     finish();
                 } else {

@@ -18,7 +18,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
@@ -29,15 +28,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.List;
 
 import me.gina.parsetagram.model.BitmapScaler;
 import me.gina.parsetagram.model.DeviceDimensionsHelper;
 import me.gina.parsetagram.model.Post;
 
-public class HomeActivity extends AppCompatActivity {
+public class CreateActivity extends AppCompatActivity {
 
-    private String imagePath = "/sdcard/DCIM/Camera/IMG_20180630_204030.jpg";//"/sdcard/DCIM/Camera/IMG_20180710_130247.jpg";
+    private String imagePath;
+    //"/sdcard/DCIM/Camera/IMG_20180630_204030.jpg"; on pixel
     private EditText captionInput;
     private Button createButton;
     private Button refreshButton;
@@ -57,7 +56,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ParseUser.logOut();
-                final Intent i = new Intent(HomeActivity.this, MainActivity.class);
+                final Intent i = new Intent(CreateActivity.this, LoginActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -75,7 +74,7 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void done(ParseException e) {
                         if (e == null) {
-                            Log.d("HomeActivity", "uploaded file success");
+                            Log.d("CreateActivity", "uploaded file success");
                             createPost(caption, parseFile, user);
                         } else {
                             e.printStackTrace();
@@ -88,14 +87,14 @@ public class HomeActivity extends AppCompatActivity {
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadTopPosts();
+                refresh();
             }
         });
 
 
     }
 
-
+//TODO add parcel stuff
     private void createPost(String caption, ParseFile imageFile, ParseUser user){
         final Post newPost = new Post();
         newPost.setCaption(caption);
@@ -106,7 +105,8 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void done(ParseException e) {
                 if (e == null){
-                    Log.d("HomeActivity", "createPost() a success");
+                    Log.d("CreateActivity", "createPost() a success");
+                    refresh();
                 } else {
                     e.printStackTrace();
                 }
@@ -114,24 +114,31 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    private void loadTopPosts(){
-        final Post.Query postsQuery = new Post.Query();
-        postsQuery.getTop().withUser();
+    private void refresh(){
+        Intent data = new Intent(CreateActivity.this, TimelineActivity.class);
+        startActivity(data);
+        finish();
 
-        postsQuery.findInBackground(new FindCallback<Post>() {
-            @Override
-            public void done(List<Post> objects, ParseException e) {
-                if (e == null){
-                    for (int i = 0; i < objects.size(); i++){
-                        Log.d("HomeActivity", "Post[" + i + "] = "
-                                + objects.get(i).getCaption() + "\nusername = "
-                                + objects.get(i).getUser().getUsername());
-                    }
-                } else {
-                    e.printStackTrace();
-                }
-            }
-        });
+
+
+//        final Post.Query postsQuery = new Post.Query();
+//        postsQuery.getTop().withUser();
+//
+//        postsQuery.findInBackground(new FindCallback<Post>() {
+//            @Override
+//            public void done(List<Post> objects, ParseException e) {
+//                if (e == null){
+//                    for (int i = 0; i < objects.size(); i++){
+//                        Log.d("CreateActivity", "Post[" + i + "] = "
+//                                + objects.get(i).getCaption() + "\nusername = "
+//                                + objects.get(i).getUser().getUsername());
+//                        //postsQuery
+//                    }
+//                } else {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
 
     }
 
@@ -151,8 +158,7 @@ public class HomeActivity extends AppCompatActivity {
         // required for API >= 24
         // See https://guides.codepath.com/android/Sharing-Content-with-Intents#sharing-files-with-api-24-or-higher
 
-        //TODO change authority?
-        Uri fileProvider = FileProvider.getUriForFile(HomeActivity.this, "com.codepath.fileprovider", photoFile);
+        Uri fileProvider = FileProvider.getUriForFile(CreateActivity.this, "com.codepath.fileprovider", photoFile);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
 
         // If you call startActivityForResult() using an intent that no app can handle, your app will crash.
@@ -185,7 +191,8 @@ public class HomeActivity extends AppCompatActivity {
         if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 // by this point we have the camera photo on disk
-                Bitmap rawTakenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+                Bitmap rawTakenImage = rotateBitmapOrientation(photoFile.getPath());
+                        //BitmapFactory.decodeFile(photoFile.getAbsolutePath());
                 // RESIZE BITMAP, see section below
                 // Get height or width of screen at runtime
                 int screenWidth = DeviceDimensionsHelper.getDisplayWidth(this);
@@ -193,8 +200,8 @@ public class HomeActivity extends AppCompatActivity {
                 // See me.gina.parsetagram.model.BitmapScaler.java: https://gist.github.com/nesquena/3885707fd3773c09f1bb
                 Bitmap resizedBitmap = BitmapScaler.scaleToFitWidth(rawTakenImage, screenWidth);
                 // Load the taken image into a preview
-                ImageView ivPreview = (ImageView) findViewById(R.id.ivPreview);
-                ivPreview.setImageBitmap(rawTakenImage);
+                ImageView ivPreview = findViewById(R.id.ivPreview);
+                ivPreview.setImageBitmap(resizedBitmap);
                 // Configure byte output stream
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 // Compress the image further
@@ -224,6 +231,7 @@ public class HomeActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                imagePath = resizedFile.getPath();
 
             } else { // Result was a failure
                 Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
@@ -231,7 +239,6 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    //TODO call this after or before resizing in onActivityResult
     public Bitmap rotateBitmapOrientation(String photoFilePath) {
         // Create and configure BitmapFactory
         BitmapFactory.Options bounds = new BitmapFactory.Options();
