@@ -67,4 +67,16 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     public int getItemCount() {
         return mPosts.size();
     }
+
+    // Clean all elements of the recycler
+    public void clear() {
+        mPosts.clear();
+        notifyDataSetChanged();
+    }
+
+//    // Add a list of items -- change to type used
+//    public void addAll(List<Post> list) {
+//        mPosts.addAll(list);
+//        notifyDataSetChanged();
+//    }
 }
