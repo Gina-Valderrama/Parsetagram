@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/etUsernameLayout"
+        android:layout_marginTop="10dp"
+
+        android:layout_width="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        app:hintAnimationEnabled="true"
+        app:passwordToggleEnabled="true">
+
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/etUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/username"
+        android:inputType="textMultiLine" />
+
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/etPasswordLayout"
+        android:layout_width="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etUsernameLayout"
+        app:hintAnimationEnabled="true"
+        app:passwordToggleEnabled="true">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            android:inputType="textPassword" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etPasswordLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="?attr/colorAccent"
+        android:text="@string/log_in"
+        android:textColor="@android:color/white"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/btnSignUp"
+        android:layout_width="267dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp"
+        android:background="@android:color/holo_blue_dark"
+        android:text="Sign up"
+        android:textColor="@android:color/white"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/tvSIPrompt"
+        android:layout_width="182dp"
+        android:layout_height="33dp"
+        android:layout_above="@+id/btnSignUp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/don_t_have_an_account_yet"
+        android:textAllCaps="false"
+        android:textColor="@android:color/holo_blue_dark"
+        tools:text="Don't have an account yet?" />
+</RelativeLayout>

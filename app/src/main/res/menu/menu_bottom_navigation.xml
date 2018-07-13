@@ -3,11 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     >
+
+
     <item
-        android:id="@+id/action_favorites"
+        android:id="@+id/action_tl"
         android:enabled="true"
 
-        android:icon="@drawable/instagram_new_post_outline_24"
+        android:icon="@drawable/home_selector"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_create"
+        android:enabled="true"
+
+        android:icon="@drawable/add_selector"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_profile"
+        android:enabled="true"
+
+        android:icon="@drawable/profile_selector"
         app:showAsAction="ifRoom"/>
 
 

@@ -34,7 +34,7 @@
             android:name=".CreateActivity"
             android:label="@string/home" />
         <activity android:name=".SignupActivity" />
-        <activity android:name=".TimelineActivity">
+        <activity android:name=".MainActivity">
 
         </activity>
     </application>

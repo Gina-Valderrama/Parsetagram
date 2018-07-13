@@ -36,6 +36,10 @@ import me.gina.parsetagram.model.BitmapScaler;
 import me.gina.parsetagram.model.DeviceDimensionsHelper;
 import me.gina.parsetagram.model.Post;
 
+//TODO fragmentize everything, also split up the option to take a pic from the add a caption and post button
+// timeline -> + -> camera/pick from gallery -> add caption/post ->timeline
+//TODO profiles
+
 public class CreateActivity extends AppCompatActivity {
 
     private String imagePath;
@@ -125,7 +129,7 @@ public class CreateActivity extends AppCompatActivity {
 
 
     private void refresh(){
-        Intent data = new Intent(CreateActivity.this, TimelineActivity.class);
+        Intent data = new Intent(CreateActivity.this, MainActivity.class);
         startActivity(data);
         finish();
 
