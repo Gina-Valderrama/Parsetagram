@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.parse.ParseException;
@@ -104,11 +105,15 @@ public class CreateActivity extends AppCompatActivity {
         newPost.setImage(imageFile);
         newPost.setUser(user);
         newPost.setTime(time);
+        // on some click or some loading we need to wait for...
+        final ProgressBar pb = (ProgressBar) findViewById(R.id.pbLoading);
+        pb.setVisibility(ProgressBar.VISIBLE);
 
         newPost.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
                 if (e == null){
+                    pb.setVisibility(ProgressBar.INVISIBLE);
                     Log.d("CreateActivity", "createPost() a success");
                     refresh();
                 } else {
