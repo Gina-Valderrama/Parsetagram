@@ -7,7 +7,7 @@
     tools:context=".CreateActivity">
 
     <EditText
-        android:id="@+id/etCaption"
+        android:id="@+id/etCaptionold"
         android:layout_width="300dp"
         android:layout_height="61dp"
         android:layout_below="@+id/btnCamera"
@@ -17,10 +17,9 @@
         android:inputType="textPersonName" />
 
     <Button
-        android:id="@+id/btnCreate"
+        android:id="@+id/btnCreateOld"
         android:layout_width="310dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etCaption"
         android:layout_centerHorizontal="true"
         android:text="@string/create" />
 
@@ -41,17 +40,17 @@
         android:layout_alignParentTop="true"
         android:text="@string/log_out" />
 
-    <Button
-        android:id="@+id/btnCamera"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/ivPreview"
-        android:layout_centerHorizontal="true"
-        android:foreground="@drawable/camera_shadow_fill"
-        android:onClick="onLaunchCamera"/>
+    <!--<Button-->
+        <!--android:id="@+id/btnCamera"-->
+        <!--android:layout_width="50dp"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:layout_below="@+id/ivPreview"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:foreground="@drawable/camera_shadow_fill"-->
+        <!--android:onClick="onLaunchCamera"/>-->
 
     <ImageView
-        android:id="@+id/ivPreview"
+        android:id="@+id/ivPreviewOld"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_alignParentTop="true"
@@ -59,13 +58,6 @@
         android:layout_marginTop="45dp"
         app:srcCompat="@android:color/darker_gray" />
 
-    <ProgressBar
-        android:id="@+id/pbLoading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="175dp"
-        android:visibility="invisible" />
+
 
 </RelativeLayout>

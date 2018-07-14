@@ -22,13 +22,7 @@ public class Post extends ParseObject {
         put(KEY_CAPTION, caption);
     }
 
-    public String getTime(){
-        return getString(KEY_TIME);
-    }
 
-    public void setTime(String time){
-        put(KEY_TIME, time);
-    }
 
     public ParseFile getImage(){
         return getParseFile(KEY_IMAGE);

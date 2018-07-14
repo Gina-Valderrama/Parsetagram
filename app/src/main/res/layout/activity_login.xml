@@ -11,6 +11,7 @@
         android:layout_marginTop="10dp"
 
         android:layout_width="300dp"
+        android:layout_above="@+id/etPasswordLayout"
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
         app:hintAnimationEnabled="true"
@@ -32,7 +33,7 @@
         android:layout_width="300dp"
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etUsernameLayout"
+        android:layout_above="@+id/btnLogin"
         app:hintAnimationEnabled="true"
         app:passwordToggleEnabled="true">
 
@@ -49,7 +50,7 @@
         android:id="@+id/btnLogin"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etPasswordLayout"
+        android:layout_above="@+id/tvSIPrompt"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="?attr/colorAccent"
@@ -80,4 +81,13 @@
         android:textAllCaps="false"
         android:textColor="@android:color/holo_blue_dark"
         tools:text="Don't have an account yet?" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="77dp"
+        app:srcCompat="@drawable/nav_logo_whiteout" />
 </RelativeLayout>

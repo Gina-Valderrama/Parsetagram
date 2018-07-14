@@ -1,7 +1,6 @@
 package me.gina.parsetagram;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -45,6 +44,14 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()){
 
                     case R.id.action_tl:
+                        FragmentTransaction f1 = getSupportFragmentManager().beginTransaction();
+                        // Replace the contents of the container with the new fragment
+                        f1.replace(R.id.placeholder, new PostsTLFragment());
+                        // or ft.add(R.id.your_placeholder, new FooFragment());
+                        // Complete the changes added above
+                        f1.commit();
+                        return true;
+
                     case R.id.action_create:
                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                         builder.setTitle("Get image from:")
@@ -53,20 +60,24 @@ public class MainActivity extends AppCompatActivity {
                                     public void onClick(DialogInterface dialogInterface, int which) {
                                         switch (which){
                                             case 0: //camera i
-                                                Intent i = new Intent(MainActivity.this, CreateActivity.class);
-                                                startActivity(i); // brings up the second activity
-                                                finish();
+                                                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                                                CreateFragment cFrag = CreateFragment.newInstance(1, "imageType");
+                                                ft.replace(R.id.placeholder, cFrag);
+                                                ft.commit();
 
                                             case 1: //open gallery
-                                                Intent x = new Intent(MainActivity.this, CreateActivity.class);
-                                                startActivity(x); // brings up the second activity
-                                                finish();
+                                                FragmentTransaction f2 = getSupportFragmentManager().beginTransaction();
 
+                                                CreateFragment cFrag2 = CreateFragment.newInstance(2, "imageType");
+                                                f2.replace(R.id.placeholder, cFrag2);
+                                                f2.commit();
 
                                         }
                                     }
                                 });
                         builder.show();
+                        return true;
+
 
                 }
                 return true;
@@ -74,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
 
 
 
