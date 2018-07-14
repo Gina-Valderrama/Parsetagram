@@ -1,6 +1,5 @@
 package me.gina.parsetagram;
 
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -40,14 +39,7 @@ import me.gina.parsetagram.model.DeviceDimensionsHelper;
 import me.gina.parsetagram.model.Post;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link CreateFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link CreateFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class CreateFragment extends Fragment {
 
     private String imagePath;
