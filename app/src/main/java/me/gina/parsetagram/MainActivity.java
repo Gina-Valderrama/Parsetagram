@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
                                                 CreateFragment cFrag = CreateFragment.newInstance(1, "imageType");
                                                 ft.replace(R.id.placeholder, cFrag);
                                                 ft.commit();
+                                                return;
 
                                             case 1: //open gallery
                                                 FragmentTransaction f2 = getSupportFragmentManager().beginTransaction();
@@ -71,13 +72,21 @@ public class MainActivity extends AppCompatActivity {
                                                 CreateFragment cFrag2 = CreateFragment.newInstance(2, "imageType");
                                                 f2.replace(R.id.placeholder, cFrag2);
                                                 f2.commit();
+                                                return;
 
                                         }
                                     }
                                 });
                         builder.show();
                         return true;
-
+                    case R.id.action_profile:
+                        FragmentTransaction f3 = getSupportFragmentManager().beginTransaction();
+                        // Replace the contents of the container with the new fragment
+                        f3.replace(R.id.placeholder, new ProfileFragment());
+                        // or ft.add(R.id.your_placeholder, new FooFragment());
+                        // Complete the changes added above
+                        f3.commit();
+                        return true;
 
                 }
                 return true;

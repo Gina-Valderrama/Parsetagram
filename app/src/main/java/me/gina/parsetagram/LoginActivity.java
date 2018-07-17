@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.parse.LogInCallback;
 import com.parse.ParseException;
@@ -18,6 +19,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordInput;
     private Button loginBtn;
     private Button signupBtn;
+    private ImageView profImg;
 
 
     @Override
@@ -40,6 +42,8 @@ public class LoginActivity extends AppCompatActivity {
         passwordInput = (EditText) findViewById(R.id.etPassword);
         loginBtn = (Button) findViewById(R.id.btnLogin);
         signupBtn = findViewById(R.id.btnSignUp);
+        profImg = findViewById(R.id.ivProfilelogin);
+
 
         signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override

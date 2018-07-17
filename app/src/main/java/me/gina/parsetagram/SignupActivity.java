@@ -1,16 +1,24 @@
 package me.gina.parsetagram;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+
+import java.io.IOException;
+
+import me.gina.parsetagram.model.BitmapScaler;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -18,6 +26,11 @@ public class SignupActivity extends AppCompatActivity {
     private EditText passwordInput;
     private EditText emailInput;
     private Button createAccountBtn;
+    private ImageView profPic;
+    private Bitmap imageBitmap;
+
+    public final static int PICK_PHOTO_CODE = 1046;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +41,7 @@ public class SignupActivity extends AppCompatActivity {
         passwordInput = findViewById(R.id.etSignupPW);
         emailInput = findViewById(R.id.etSignupEmail);
         createAccountBtn = findViewById(R.id.btnCreateAccount);
+        profPic = findViewById(R.id.ivProfilesignup);
 
         createAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,5 +78,31 @@ public class SignupActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    public void profLaunchGallery(View v){
+        Intent intent = new Intent(Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            // Bring up gallery to select a photo
+            startActivityForResult(intent, PICK_PHOTO_CODE);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK && requestCode == PICK_PHOTO_CODE) {
+            if (data != null) {
+                Uri photoUri = data.getData();
+                try {
+                    imageBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), photoUri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                imageBitmap = BitmapScaler.scaleToFitHeight(imageBitmap, 100);
+
+                profPic.setImageBitmap(imageBitmap);
+            }
+        }
     }
 }

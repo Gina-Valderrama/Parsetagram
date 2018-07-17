@@ -47,12 +47,17 @@ public class Post extends ParseObject {
         }
 
         public Query getTop(){
-            setLimit(20);
+            setLimit(40);
             return this;
         }
 
         public Query withUser() {
             include("user");
+            return this;
+        }
+
+        public Query createdBy(ParseUser user) {
+            whereEqualTo(KEY_USER, user);
             return this;
         }
     }

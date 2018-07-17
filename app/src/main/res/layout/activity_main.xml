@@ -6,11 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/LogoIV"
+        android:layout_width="276dp"
+        android:layout_height="65dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/nav_logo_whiteout"/>
+
     <FrameLayout
         android:id="@+id/placeholder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottom_navigation"/>
+        android:background="@drawable/border"
+        android:layout_below="@id/LogoIV"
+        android:layout_above="@id/bottom_navigation">
+
+    </FrameLayout>
 
 
     <android.support.design.widget.BottomNavigationView
